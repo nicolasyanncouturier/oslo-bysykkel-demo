@@ -1,0 +1,80 @@
+{
+  "last_updated": 1553592653,
+  "data": {
+    "stations": [
+      {
+        "station_id":"627",
+        "name":"Skøyen Stasjon",
+        "address":"Skøyen Stasjon",
+        "lat":59.9226729,
+        "lon":10.6788129,
+        "capacity":20
+      },
+      {
+        "station_id":"623",
+        "name":"7 Juni Plassen",
+        "address":"7 Juni Plassen",
+        "lat":59.9150596,
+        "lon":10.7312715,
+        "capacity":15
+      },
+      {
+        "station_id":"610",
+        "name":"Sotahjørnet",
+        "address":"Sotahjørnet",
+        "lat":59.9099822,
+        "lon":10.7914482,
+        "capacity":20
+      },
+      {
+        "station_id":"625",
+        "name":"Stasjon mangler tilg. lås",
+        "lat":59.9150596,
+        "lon":10.7312715,
+        "capacity":15
+      },
+      {
+        "station_id":"626",
+        "name":"Stasjon mangler tilg. sykkel",
+        "lat":59.9150596,
+        "lon":10.7312715,
+        "capacity":15
+      },
+      {
+        "station_id":"627",
+        "name":"Stasjon mangler både lås og sykkel",
+        "lat":59.9150596,
+        "lon":10.7312715,
+        "capacity":15
+      },
+      {
+        "station_id":"628",
+        "name":"Virtuell stasjon",
+        "lat":59.9150596,
+        "lon":10.7312715,
+        "capacity":15
+      },
+      {
+        "station_id":"629",
+        "name":"Leier ikke sykkel men kan ta i mot",
+        "lat":59.9150596,
+        "lon":10.7312715,
+        "capacity":15
+      },
+      {
+        "station_id":"630",
+        "name":"Leier sykkel men kan ikke ta i mot",
+        "lat":59.9150596,
+        "lon":10.7312715,
+        "capacity":15
+      },
+      {
+        "station_id":"631",
+        "name":"Leier ikke sykkel og tar ikke i mot",
+        "lat":59.9150596,
+        "lon":10.7312715,
+        "capacity":15
+      }
+    ]
+  }
+}

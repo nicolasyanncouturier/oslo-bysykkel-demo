@@ -1,0 +1,24 @@
+
+<td>
+    <span>{{stationName}}</span>
+</td>
+<td>
+    {{#isRenting}}
+        <span class="mr-2" title="Tilgjengelige sykler"><i class="fa fa-bicycle mr-1" aria-hidden="true"></i>{{#numBikesAvailable}}{{.}}{{/numBikesAvailable}}{{^numBikesAvailable}}?{{/numBikesAvailable}}</span>
+    {{/isRenting}}
+    {{^isRenting}}
+        <span class="mr-2" title="Leier ikke ut sykler"><i class="fa fa-bicycle mr-1" aria-hidden="true"></i><i class="fa fa-times-circle red-text mr-1" aria-hidden="true"></i></span>
+    {{/isRenting}}
+    {{#isReturning}}
+    <span title="Tilgjengelige lås"><i class="fa fa-lock mr-1" aria-hidden="true"></i>{{#numDocksAvailable}}{{.}}{{/numDocksAvailable}}{{^numDocksAvailable}}?{{/numDocksAvailable}}</span>
+    {{/isReturning}}
+    {{^isReturning}}
+        <span class="mr-2" title="Tar ikke i mot sykler"><i class="fa fa-lock mr-1" aria-hidden="true"></i><i class="fa fa-times-circle red-text mr-1" aria-hidden="true"></i></span>
+    {{/isReturning}}
+</td>
+<td class="d-none d-md-table-cell">
+    {{#lastReported}}{{.}}{{/lastReported}}{{^lastReported}}-{{/lastReported}}
+</td>
+<td class="d-none d-lg-table-cell">
+    {{#address}}{{.}}{{/address}}{{^address}}-{{/address}}
+</td>

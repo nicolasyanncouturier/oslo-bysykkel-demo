@@ -1,0 +1,58 @@
+<html>
+<head>
+    <title>Oslo Bysykkel Demo - {{title}}</title>
+    {{> mdbhead}}
+    <link rel="stylesheet" href="mdbootstrap-4.18.0/css/addons/datatables.min.css">
+</head>
+
+<body>
+
+{{> header}}
+
+<div class="container py-3">
+{{^statuses.empty}}
+    <table id="statuses" class="table table-hover">
+        <thead>
+            <tr>
+                <th>Stasjon</th>
+                <th>Tilgjengelihet</th>
+                <th class="d-none d-md-table-cell">Sist rapportert</th>
+                <th class="d-none d-lg-table-cell">Adresse</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#statuses}}
+            <tr>
+                {{> status}}
+            </tr>
+            {{/statuses}}
+        </tbody>
+    </table>
+{{/statuses.empty}}
+{{#statuses.empty}}
+    <p class="my-5 alert alert-warning">Uffda! Vi fikk ikke tak i data fra Oslo Bysykkel. Dobbeltsjekk om du er tilkoblet nettet eller prøv igjen senere.</p>
+{{/statuses.empty}}
+</div>
+
+{{> mdbscripts}}
+
+<script src="mdbootstrap-4.18.0/js/addons/datatables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#statuses').DataTable({
+            paging: false,
+            ordering: false,
+            info: false,
+            language: {
+                search: 'Søk',
+                emptyTable: 'Laster data...',
+                zeroRecords: 'Ingen stasjon funnet'
+            }
+        });
+    });
+</script>
+
+{{> footer}}
+
+</body>
+</html>
