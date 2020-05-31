@@ -35,15 +35,15 @@ class StatusController(private val service: OsloBysykkelService) {
                               val address: String?,
                               val lastReported: String?) {
         companion object {
-            fun makeStatusViewData(statusWithInformation: StatusWithInformation): StatusViewData? {
-                return statusWithInformation.stationInformation.name?.let { name ->
+            fun makeStatusViewData(statusWithStation: StatusWithStation): StatusViewData? {
+                return statusWithStation.stationInformation.name?.let { name ->
                     StatusViewData(name,
-                        statusWithInformation.status.isRenting,
-                        statusWithInformation.status.numBikesAvailable,
-                        statusWithInformation.status.isReturning,
-                        statusWithInformation.status.numDocksAvailable,
-                        statusWithInformation.stationInformation.address,
-                        statusWithInformation.status.lastReported?.let { lastReported ->
+                        statusWithStation.status.isRenting,
+                        statusWithStation.status.numBikesAvailable,
+                        statusWithStation.status.isReturning,
+                        statusWithStation.status.numDocksAvailable,
+                        statusWithStation.stationInformation.address,
+                        statusWithStation.status.lastReported?.let { lastReported ->
                             dateTimeFormatter.format(
                                 LocalDateTime.ofInstant(lastReported, DefaultRegion.zone))
                         }

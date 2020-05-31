@@ -1,7 +1,6 @@
 package no.nicolasyanncouturier.obd
 
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.context.annotation.Bean
 import org.springframework.hateoas.CollectionModel
 import org.springframework.hateoas.RepresentationModel
 import org.springframework.hateoas.server.core.Relation
@@ -9,21 +8,40 @@ import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 import javax.servlet.http.HttpServletResponse
 
 @RestController
 class StatusApiController(private val service: OsloBysykkelService) {
 
+    companion object {
+
+        @JvmStatic
+        private val httpHeaderInstantFormatter = DateTimeFormatter.RFC_1123_DATE_TIME
+            .withLocale(Locale.UK)
+            .withZone(ZoneId.of("GMT"))
+
+    }
+
     @Autowired
     private lateinit var response: HttpServletResponse
 
-    @GetMapping("/statuses/end-user-friendly", produces = [ "application/hal+json" ])
+    @GetMapping("/statuses/end-user-friendly", produces = ["application/hal+json"])
     fun listEndUserFriendlyStatuses(): CollectionModel<StatusApiData> {
-        val statuses = service.listStatuses().mapNotNull { StatusApiData.makeStatusApiData(it) }.toList()
+        val statusesWithMeta = service.listStatusesWithMetaInfo()
+        val statuses = statusesWithMeta.statusesWithStation.mapNotNull { StatusApiData.makeStatusApiData(it) }.toList()
         val self = linkTo(methodOn(StatusApiController::class.java).listEndUserFriendlyStatuses()).withSelfRel()
-//        response.addHeader("Last-Modified", )
-//        response.addHeader("Expires", )
-//        response.addHeader("Cache-Control", )
+        statusesWithMeta.lastUpdated?.let { lu ->
+            response.addHeader("Last-Modified", httpHeaderInstantFormatter.format(lu))
+            statusesWithMeta.ttl?.run {
+                response.addHeader("Expires", httpHeaderInstantFormatter.format(lu.plusSeconds(this)))
+            }
+        }
+        statusesWithMeta.ttl?.run {
+            response.addHeader("Cache-Control", "max-age=" + this)
+        }
         return CollectionModel.of(statuses, self)
     }
 
@@ -36,15 +54,15 @@ class StatusApiController(private val service: OsloBysykkelService) {
                              val address: String?,
                              val lastReported: Long?) : RepresentationModel<StatusApiData>() {
         companion object {
-            fun makeStatusApiData(statusWithInformation: StatusWithInformation): StatusApiData? {
-                return statusWithInformation.stationInformation.name?.let { name ->
+            fun makeStatusApiData(statusWithStation: StatusWithStation): StatusApiData? {
+                return statusWithStation.stationInformation.name?.let { name ->
                     StatusApiData(name,
-                        statusWithInformation.status.isRenting,
-                        statusWithInformation.status.numBikesAvailable,
-                        statusWithInformation.status.isReturning,
-                        statusWithInformation.status.numDocksAvailable,
-                        statusWithInformation.stationInformation.address,
-                        statusWithInformation.status.lastReported?.toEpochMilli())
+                        statusWithStation.status.isRenting,
+                        statusWithStation.status.numBikesAvailable,
+                        statusWithStation.status.isReturning,
+                        statusWithStation.status.numDocksAvailable,
+                        statusWithStation.stationInformation.address,
+                        statusWithStation.status.lastReported?.toEpochMilli())
                 }
             }
         }
