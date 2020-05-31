@@ -62,10 +62,12 @@ class StatusApiController(private val service: OsloBysykkelService) {
                         statusWithStation.status.isReturning,
                         statusWithStation.status.numDocksAvailable,
                         statusWithStation.stationInformation.address,
-                        statusWithStation.status.lastReported?.toEpochMilli())
+                        statusWithStation.status.lastReported?.epochSecond)
                 }
             }
         }
     }
+
+
 
 }
