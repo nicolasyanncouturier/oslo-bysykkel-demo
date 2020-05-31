@@ -33,7 +33,7 @@ The IDE should configure a Spring Boot run configuration automatically upon impo
 Otherwise, create a Spring Boot run configuration and configure it like the following:
 ![IntelliJ configuration screenshot](./docs/api-ij-conf.png)
 
-Click the run icon and use your favorite http client to query http://localhost:8081/statuses/end-user-friendly.
+Click the run icon and use your favorite http client to query http://localhost:8089/statuses/end-user-friendly.
 
 ### Command line
 
@@ -46,7 +46,7 @@ Or run the Spring Boot plugin directly
 cd api && mvn spring-boot:run
 ```
 
-Finally use your favorite http client to query http://localhost:8081/statuses/end-user-friendly.
+Finally use your favorite http client to query http://localhost:8089/statuses/end-user-friendly.
 
 ### What you should see
 

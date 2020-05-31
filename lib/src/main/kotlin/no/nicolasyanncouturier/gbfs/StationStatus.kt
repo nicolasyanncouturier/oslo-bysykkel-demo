@@ -3,7 +3,7 @@ package no.nicolasyanncouturier.gbfs
 import com.fasterxml.jackson.annotation.JsonProperty
 import java.time.Instant
 
-data class StationStatus(val lastUpdated: Instant?, val data: Data?) {
+data class StationStatus(val lastUpdated: Instant?, val ttl: Int?, val data: Data?) {
     data class Data(@JsonProperty("stations") val statuses: List<Status>?) {
         data class Status(
             val isInstalled: Boolean?,
