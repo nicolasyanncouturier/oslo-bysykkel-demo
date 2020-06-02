@@ -198,4 +198,6 @@ OkHttp+Jackson for fetching and mapping the GBFS data for their flexibility and 
 
 Mustache as it is easy to use and prevents from writing code in the view / templates (as opposed to say JSP).
 
-Material Design for Bootstrap as it provides a clean look-and-feel and all of the Bootstrap nice-ities for a quick minimal presentation layer. 
+Material Design for Bootstrap as it provides a clean look-and-feel and all of the Bootstrap nice-ities for a quick minimal presentation layer.
+
+Spock for testing as it provides a nice way to structure tests as well a easy parameterized testing 

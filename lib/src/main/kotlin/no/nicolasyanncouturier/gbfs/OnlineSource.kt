@@ -6,20 +6,17 @@ import org.slf4j.LoggerFactory
 import java.io.IOException
 import java.net.SocketTimeoutException
 import java.util.Locale
-import java.util.concurrent.TimeUnit
 
 class OnlineSource(private val serviceDocumentUrl: String,
                    private val locale: Locale,
-                   private val clientIdentifier: String?) : Source {
+                   private val clientIdentifier: String?,
+                   private val httpClient: OkHttpClient) : Source {
 
     private companion object {
 
         @Suppress("JAVA_CLASS_ON_COMPANION")
         @JvmStatic
         private val logger = LoggerFactory.getLogger(javaClass.enclosingClass)
-
-        @JvmStatic
-        private val httpClient = OkHttpClient.Builder().callTimeout(1, TimeUnit.SECONDS).build()
 
     }
 

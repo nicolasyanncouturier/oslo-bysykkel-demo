@@ -30,7 +30,7 @@ class StatusApiController(private val service: OsloBysykkelService) {
 
     @GetMapping("/statuses/end-user-friendly", produces = ["application/hal+json"])
     fun listEndUserFriendlyStatuses(): CollectionModel<StatusApiData> {
-        val statusesWithMeta = service.listStatusesWithMetaInfo()
+        val statusesWithMeta = service.listStatuses()
         val statuses = statusesWithMeta.statusesWithStation.mapNotNull { StatusApiData.makeStatusApiData(it) }.toList()
         val self = linkTo(methodOn(StatusApiController::class.java).listEndUserFriendlyStatuses()).withSelfRel()
         statusesWithMeta.lastUpdated?.let { lu ->

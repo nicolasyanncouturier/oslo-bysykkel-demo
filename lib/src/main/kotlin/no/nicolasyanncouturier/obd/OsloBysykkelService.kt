@@ -4,7 +4,6 @@ import no.nicolasyanncouturier.gbfs.StationInformation
 import no.nicolasyanncouturier.gbfs.StationStatus
 import no.nicolasyanncouturier.lang.Maps
 import org.springframework.stereotype.Service
-import java.time.Instant
 
 @Service
 class OsloBysykkelService(private val osloBysykkelSource: OsloBysykkelSource) {
@@ -19,11 +18,7 @@ class OsloBysykkelService(private val osloBysykkelSource: OsloBysykkelSource) {
         }
     }
 
-    fun listStatuses(): List<StatusWithStation> {
-        return listStatusesWithMetaInfo().statusesWithStation;
-    }
-
-    fun listStatusesWithMetaInfo(): Statuses {
+    fun listStatuses(): Statuses {
         val status = osloBysykkelSource.fetchStationStatus()
         val information = osloBysykkelSource.fetchStationInformation()
         val statusesWithStation = Maps.leftJoin(
@@ -49,12 +44,6 @@ class OsloBysykkelService(private val osloBysykkelSource: OsloBysykkelSource) {
             ?.mapNotNull { status -> status.stationId?.let { id -> id to status } }
             ?.toMap()
             ?: emptyMap()
-    }
-
-    private fun mostRecent(instant1: Instant?, instant2: Instant?): Instant? {
-        return if (instant1 != null && instant2 != null) {
-            if (instant1 > instant2) instant1 else instant2
-        } else instant1 ?: instant2
     }
 
 }

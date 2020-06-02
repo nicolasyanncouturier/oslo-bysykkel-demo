@@ -20,10 +20,10 @@ class StatusController(private val service: OsloBysykkelService) {
     @GetMapping("/", produces = ["text/html"])
     fun listStatuses(model: Model): String {
         model["title"] = "Tilgjengelihet på stasjon"
-        model["statuses"] = service.listStatuses().mapNotNull {
-            StatusViewData.makeStatusViewData(
-                it)
-        }.toList()
+        val viewData: List<StatusViewData> = service.listStatuses().statusesWithStation
+            .mapNotNull {StatusViewData.makeStatusViewData(it)}
+            .toList()
+        model["statuses"] = viewData
         return "statuses"
     }
 
