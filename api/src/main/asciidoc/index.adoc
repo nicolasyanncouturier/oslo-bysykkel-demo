@@ -1,0 +1,28 @@
+= Getting Started With Oslo Bysykkel Demo API
+
+== Auto dicovery at the root
+
+You can query the root to discover which other resources are available:
+
+.request
+include::{snippets}/head-root/http-request.adoc[]
+
+.response
+include::{snippets}/head-root/http-response.adoc[]
+
+Or if you prefer a more visual JSON version:
+
+.request
+include::{snippets}/get-root/http-request.adoc[]
+
+.response
+include::{snippets}/get-root/http-response.adoc[]
+
+
+== End-User friendly list of statuses:
+
+.request
+include::{snippets}/get-statuses-end-user-friendly/http-request.adoc[]
+
+.response
+include::{snippets}/get-statuses-end-user-friendly/http-response.adoc[]

@@ -48,6 +48,10 @@ cd api && mvn spring-boot:run
 
 Finally use your favorite http client to query http://localhost:8089/statuses/end-user-friendly.
 
+### Documentation
+
+Documentation of the API should be available at http://localhost:8089/index.html
+
 ### What you should see
 
 For example:
@@ -200,4 +204,6 @@ Mustache as it is easy to use and prevents from writing code in the view / templ
 
 Material Design for Bootstrap as it provides a clean look-and-feel and all of the Bootstrap nice-ities for a quick minimal presentation layer.
 
-Spock for testing as it provides a nice way to structure tests as well a easy parameterized testing 
+Spock for testing as it provides a nice way to structure tests as well a easy parameterized testing
+
+RestDocs to generate a minimal API doc from the tests 

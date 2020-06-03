@@ -14,12 +14,12 @@ import java.util.Locale
 import javax.servlet.http.HttpServletResponse
 
 @RestController
-class StatusApiController(private val service: OsloBysykkelService) {
+class StatusApiController {
 
     companion object {
 
         @JvmStatic
-        private val httpHeaderInstantFormatter = DateTimeFormatter.RFC_1123_DATE_TIME
+        val httpHeaderInstantFormatter = DateTimeFormatter.RFC_1123_DATE_TIME
             .withLocale(Locale.UK)
             .withZone(ZoneId.of("GMT"))
 
@@ -27,6 +27,9 @@ class StatusApiController(private val service: OsloBysykkelService) {
 
     @Autowired
     private lateinit var response: HttpServletResponse
+
+    @Autowired
+    private lateinit var service: OsloBysykkelService
 
     @GetMapping("/statuses/end-user-friendly", produces = ["application/hal+json"])
     fun listEndUserFriendlyStatuses(): CollectionModel<StatusApiData> {
