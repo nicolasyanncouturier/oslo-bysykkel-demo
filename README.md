@@ -19,14 +19,14 @@ This allows `web` and `api` to be deployed separately as they may have different
 
 # Dog-fooding
 
-The API can be used from the webapp as the source of the data to display in order to demonstrate the "dog-fooding" principle.
+The API can be used from the webapp as the source of the data to display in order to demonstrate the "dog-feeding" principle.
 
-To achieve the following:
+To achieve this, do the following:
 - start the API (see below); it should run on port 8089
-- start the webapp with the Spring profile `dogfood` activated (i.e. add `-Dspring.profiles.active=dogfood`) when starting the app
+- start the webapp (see below) with the Spring profile `dogfood` activated (i.e. add `-Dspring.profiles.active=dogfood`); it should run on port 8080
 
 The webapp now issues calls to the API in order to get the data to display.
-Note that the API can still be started in offline moder as described below 
+Note that the API can still be started in offline mode as described below. 
 
 # Running
 
